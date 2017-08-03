@@ -4,12 +4,8 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
-
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
+I'm a software engineer interested in big data analytics and machine learning, and open-source advocate.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[bjcutler@us.ibm.com](mailto:bjcutler@us.ibm.com)
