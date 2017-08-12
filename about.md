@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-I'm a software engineer interested in big data analytics and machine learning, and open-source advocate.
+I'm a software engineer interested in big data analytics and machine learning, computer vision, distributed computing, and an open-source advocate.
 
 ### Contact me
 
