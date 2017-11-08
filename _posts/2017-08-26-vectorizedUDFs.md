@@ -36,7 +36,7 @@ pandas_udf(func, DoubleType())
 # Use a decorator
 @pandas(returnType=DoubleType())
 def func(x):
-    ...
+    # do something with "x" (pandas.Series) and return "y" (also a pandas.Series)
     return y
 ```
 
