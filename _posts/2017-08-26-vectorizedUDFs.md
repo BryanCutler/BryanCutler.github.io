@@ -29,7 +29,7 @@ _Updated November 8, 2017_
 There is no longer any configuration setting to enable vectorized UDFs, instead you need to declare
 your function to Spark as `pandas_udf`:
 
-```
+```python
 # Wrap the function "func"
 pandas_udf(func, DoubleType())
 
