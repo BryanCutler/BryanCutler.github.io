@@ -24,12 +24,20 @@ can download it as a gist [here][5].
 
 ## How to Enable
 
-There is a global conf that will enable vectorized UDFs for Python, and we also want to make sure
-to enable Arrow first.  Assuming a `SparkSession` as "spark":
+_Updated November 8, 2017_
+
+There is no longer any configuration setting to enable vectorized UDFs, instead you need to declare
+your function to Spark as `pandas_udf`:
 
 ```
-spark.conf.set("spark.sql.execution.arrow.enable", "true")
-spark.conf.set("spark.sql.execution.arrow.vectorizeUDFs", "true")
+# Wrap the function "func"
+pandas_udf(func, DoubleType())
+
+# Use a decorator
+@pandas(returnType=DoubleType())
+def func(x):
+    ...
+    return y
 ```
 
 With that done, you will want to make sure your UDFs are in a vectorized form. Most mathematical
@@ -46,12 +54,12 @@ def func(a, b):
 ```
 
 This vectorized function can be then be made into a Python UDF exactly the same way you would
-normally define a `udf` Spark and can then be expressed as a column in Spark SQL with the return
+normally define a `udf` in Spark and can then be expressed as a column in Spark SQL with the return
 type as specified, for instance assuming a `DataFrame` "df" with existing columns "a" and "b":
 
 ```python
-func_udf = udf(func, DoubleType())
-df.withColumn("c", my_udf(col("a"), col("b")))
+func_udf = pandas_udf(func, DoubleType())
+df.withColumn("c", func_udf(col("a"), col("b")))
 ```
 
 ## Behind the Scenes
@@ -150,6 +158,14 @@ data with Spark and still be able utilize the same functions without a bunch of 
 If this type of functionality could be useful to you, I urge you to try out the [patch][8] from
 [SPARK-21404][1] and vote or watch this issue. Also, please participate in the [SPIP][4] discussion
 with any feedback from real use cases is always a huge help.
+
+_Updated November 8, 2017 to reflect API changes_
+
+### Good News!
+
+Vectorized UDFs have been merged into Spark along with groupby-apply with Pandas DataFrames from
+[SPARK-20396][3]. Some details are still in the works, but be sure to look for this functionality
+in the Spark 2.3 release!
 
 
 [1]: https://issues.apache.org/jira/browse/SPARK-21404
